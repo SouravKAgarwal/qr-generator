@@ -15,13 +15,15 @@
         <div id="imgBox">
             <img src="" id="qrImg">
         </div>
-        <button onclick="generateQR()">Generate QR Code</button>
+        <button onclick="generateQR()" id="button">Generate QR Code</button>
+        <a href="" download="qr-code.png" id="downloadLink" style="display: none;">Download QR Code</a>
     </div>
 
     <script>
         let imgBox = document.getElementById("imgBox");
         let qrImg = document.getElementById("qrImg");
         let qrText = document.getElementById("qrText");
+        let downloadLink = document.getElementById("downloadLink");
 
         function generateQR() {
         if (qrText.value.length > 0) {
@@ -29,6 +31,9 @@
             "https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=" +
             qrText.value;
             imgBox.classList.add("show-img");
+            button.style.display= "none";
+            downloadLink.href = qrImg.src;
+            downloadLink.style.display="flex";
         } else {
             qrText.classList.add("error");
             setTimeout(() => {
